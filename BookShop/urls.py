@@ -17,16 +17,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import include, url
 from profiles import views as profile_views
 from contact import views as contact_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', profile_views.home, name='home'),
     path('about/', profile_views.about, name='about'),
-    path('contact/', contact_views.contact, name='contact')
+    path('contact/', contact_views.contact, name='contact'),
+    url(r'^accounts/', include('allauth.urls'))
 ]
-
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)

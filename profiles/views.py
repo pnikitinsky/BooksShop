@@ -13,7 +13,8 @@ def about(request):
     template = 'about.html'
     return render(request, template, context)
 
-@login_required    
+
+@login_required
 def userProfile(request):
     user = request.user
     context = {'user': user}

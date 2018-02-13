@@ -9,6 +9,7 @@
         {% url 'home' as home %}
         {% url 'about' as about %}
         {% url 'contact' as contact %}
+        {% url 'checkout' as checkout %}
           <li {% if request.path == home %} class="active" {% endif %} class="nav-item">
             <a class="nav-link" href="{% url 'home' %}">Home</a>
           </li>
@@ -18,8 +19,13 @@
           <li {% if request.path == contact %} class="active" {% endif %} class="nav-item">
             <a class="nav-link" href="{% url 'contact' %}">Contact</a>
           </li>
+          {% if request.user.is_authenticated %}
+          <li {% if request.path == checkout %} class="active" {% endif %} class="nav-item">
+            <a class="nav-link" href="{% url 'checkout' %}">Checkout</a>
+          </li>
+          {% endif %}
            <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
             {% if not request.user.is_authenticated %}
               <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>

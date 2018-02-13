@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 {% block jumbotron %}
     <div class="jumbotron">
       <h1 class="display-3">
@@ -10,5 +10,54 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Hello world from home</h1>
+    <div class="row">
+          <div class="col-md-4">
+            <h2>Heading</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+          </div>
+          <div class="col-md-4">
+           <a href="#">
+            <img id="houseImage" src="{% static 'img/107.jpg' %}" class="img-responsive" />
+           </a> 
+          </div>
+          <div class="col-md-4">
+            {% if request.user.is_authenticated %}
+            <h3>Hello {{ request.user }}</h3>
+            {% else %}
+           <form class="login" method="POST" action="{% url 'account_login' %}">
+           {% csrf_token %}
+    
+                <div id="div_id_login" class="form-group"> 
+                    <label for="id_login" class="control-label  requiredField">
+                        Login<span class="asteriskField">*</span> 
+                    </label> 
+                    <div class="controls ">
+                     <input type="text" name="login" placeholder="Username or e-mail" autofocus="autofocus" class="textinput textInput form-control" required="" id="id_login" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;); cursor: auto;" autocomplete="off"> 
+                    </div> 
+                </div> 
+                <div id="div_id_password" class="form-group"> 
+                    <label for="id_password" class="control-label  requiredField">
+                    Password<span class="asteriskField">*</span> 
+                    </label> 
+                    <div class="controls "> 
+                        <input type="password" name="password" placeholder="Password" class="textinput textInput form-control" required="" id="id_password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;);" autocomplete="off"> 
+                    </div> 
+                </div> 
+                <div class="form-group"> 
+                    <div id="div_id_remember" class="checkbox"> 
+                        <label for="id_remember" class=""> 
+                            <input type="checkbox" name="remember" class="checkboxinput" id="id_remember">
+                        Remember Me
+                        </label> 
+                    </div> 
+                </div>
+                <a class="btn btn-link button secondaryAction" href="{% url 'account_reset_password' %}">
+                Forgot Password?</a>
+                <a class="btn btn-link button secondaryAction" href="{% url 'account_signup' %}">Sign Un</a>
+                <button type="submit" class="btn btn-primary primaryAction">Sign In</button>
+          </form>
+  {% endif %}
+          </div>
+    </div>
 {% endblock %}

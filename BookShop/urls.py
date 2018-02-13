@@ -20,12 +20,15 @@ from django.urls import path
 from django.conf.urls import include, url
 from profiles import views as profile_views
 from contact import views as contact_views
+from checkout import views as checkout_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', profile_views.home, name='home'),
     path('about/', profile_views.about, name='about'),
+    path('profile/', profile_views.userProfile, name='profile'),
+    path('checkout/', checkout_views.checkout, name='checkout'),
     path('contact/', contact_views.contact, name='contact'),
     url(r'^accounts/', include('allauth.urls'))
 ]
